@@ -1,5 +1,12 @@
 FROM haproxy:3.1-alpine
 
+USER root
+
+RUN apk upgrade --no-cache -a && \
+    apk add --no-cache ca-certificates tzdata openssl curl && \
+    mkdir /cert && \
+    chown -R nobody:nobody /cert
+
 EXPOSE 2375
 ENV ALLOW_RESTARTS=0 \
     ALLOW_STOP=0 \
